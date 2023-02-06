@@ -1,9 +1,7 @@
 package day14;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,22 +22,20 @@ public class Task2 {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
+
+                String[] person = line.split(" ");
+                if (Integer.parseInt(person[1]) < 0) {
+                    throw new IllegalArgumentException("Некорректный входной файл");
+                }
+
                 list.add(line);
             }
 
-            for (String s : list) {
-                String[] str = s.split(" ");
-                if (Integer.parseInt(str[1]) < 0) {
-                    throw new IllegalArgumentException();
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Некорректный входной файл");
+            return list;
+
+        } catch (FileNotFoundException | IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             return null;
         }
-        return list;
     }
-
 }

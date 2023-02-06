@@ -34,23 +34,16 @@ public class Task1 {
 
             }
 
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Некорректный входной файл");
-        }
-
-        for (String s : shoesList) {
-            String[] splitList = s.split(";");
-            if (splitList.length > 3) {
-                throw new IllegalArgumentException();
+            for (String s : shoesList) {
+                String[] splitList = s.split(";");
+                if (splitList.length > 3) {
+                    throw new IllegalArgumentException();
+                }
+                if (Integer.parseInt(splitList[2]) == 0) {
+                    shoesListZero.add(s);
+                }
             }
-            if (Integer.parseInt(splitList[2]) == 0) {
-                shoesListZero.add(s);
-            }
-        }
 
-        try {
             PrintWriter writer = new PrintWriter(file1);
             for (String s : shoesListZero) {
                 writer.println(s);
@@ -58,6 +51,8 @@ public class Task1 {
             writer.close();
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Некорректный входной файл");
         }
     }
 }

@@ -2,7 +2,6 @@ package day14;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Task1 {
@@ -19,26 +18,18 @@ public class Task1 {
             String[] num = text.split(" ");
 
             if (num.length != 10) {
-                throw new IllegalArgumentException();
-            }
-            int[] numbers = new int[num.length];
-            int counter = 0;
-
-            for (String s : num) {
-                numbers[counter++] = Integer.parseInt(s);
+                throw new IllegalArgumentException("Неккоректный входной файл");
             }
 
             int sum = 0;
 
-            for (int x : numbers) {
-                sum += x;
+            for (String s : num) {
+                sum += Integer.parseInt(s);
             }
 
             System.out.println(sum);
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден");
-        } catch (IllegalArgumentException e) {
-            System.out.println("Некорректный входной файл");
+        } catch (FileNotFoundException | IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
